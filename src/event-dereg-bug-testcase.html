@@ -1,0 +1,77 @@
+<html>
+<head>
+    <style>
+        c-element{
+            display:block;
+        }
+    </style>
+    <script is="wc-config" data-state-css="tick"></script>
+</head>
+<body>
+    <p class="description">
+        Clicking "tick" modifies the tick param in state, and each element should add an additonal X to its content in reaction to the state update.
+    </p>
+    <p class="description">
+        Clicking "break" removes the second and third element from the page, removing two state event listeners.
+    </p>
+    <p class="description">
+        If things work correctly, additional
+        button clicks on "tick" should continue to add "X" to the two remaining elements.
+    </p>
+    <p class="description">
+        The identified fail mode would only increment one of the elements.
+    </p>
+    <fieldset>
+        <legend>The Test Elements</legend>
+        <c-element></c-element>
+        <c-element></c-element>
+        <c-element></c-element>
+        <c-element></c-element>
+    </fieldset>
+    <button onclick="tick()">Tick</button>
+    <button onclick="breakit()">Breakit</button>
+    <script src="lib/wc-core.js"></script>
+    <script>
+    function tick(){
+        let tick=wc.StateManager.get('tick')|0;
+        tick++;
+        wc.StateManager.setParam('tick',tick);
+    }
+    function breakit(){
+        let eles = [...document.querySelectorAll('c-element')];
+        eles[1].parentNode.removeChild(eles[1]);
+        eles[2].parentNode.removeChild(eles[2]);
+    }
+    class CElement extends HTMLElement {
+        constructor(self) {
+            self = super(self);
+            return self;
+        }
+        connectedCallback() {
+            this.innerHTML="Ticks:";
+            this.stateHandler = wc.StateManager.onParamChange('tick',()=>{
+                this.innerHTML += "X";
+            })
+        }
+        disconnectedCallback() {
+            this.stateHandler.destroy();
+            this.stateHandler = undefined;
+        }
+    }
+    customElements.define('c-element', CElement);
+    wc.StateManager.addConfig({
+      tick: {
+        validator: function(val){
+          console.log('validated!', val);
+          return true;
+        },
+        parser: (val) => {
+          console.log('parsed!', val);
+          return parseInt(val)
+        },
+        default: 1
+      }
+    })
+    </script>
+</body>
+</html>

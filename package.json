@@ -1,0 +1,39 @@
+{
+  "name": "@helio/wc-core",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/wc-core.js",
+  "module": "lib/wc-core.js",
+  "exports": {
+    "wc-core": "node_modules/@helio/wc-core/lib/wc-core.js"
+  },
+  "rollup": {
+    "externals": [
+      "@helio/wc-utils"
+    ],
+    "entry": "src/components/wc-core/wc-core.js",
+    "format": "es",
+    "imports": {
+      "@helio/wc-utils": "node_modules/@helio/wc-utils/lib/wc-utils.js",
+      "wc-utils": "node_modules/@helio/wc-utils/lib/wc-utils.js",
+      "babel-polyfill-dist": "node_modules/babel-polyfill/dist/polyfill.js",
+      "css-scope-polyfill": "node_modules/@helio/wc-tasks/poly/css.scope.js",
+      "object-assign-polyfill": "node_modules/@helio/wc-tasks/poly/object.assign.js"
+    }
+  },
+  "scripts": {
+    "install": "node install",
+    "startYarn": "npm link helio & yarn",
+    "startNpm": "npm link helio & npm install"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@helio/wc-utils": "^1.6.0",
+    "document-register-element": "^1.4.0",
+    "gulp": "^3.9.0"
+  },
+  "devDependencies": {
+    "@helio/wc-tasks": "^1.6.0"
+  }
+}

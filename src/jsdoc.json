@@ -1,0 +1,35 @@
+{
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc"]
+  },
+  "source": {
+    "includePattern": ".+\\.js(doc)?$",
+    "excludePattern": "(^|\\/|\\\\)_"
+  },
+  "opts": {
+    "destination": ""
+  },
+  "templates": {
+    "default": {
+      "layoutFile": "./src/jsdoc.tmpl",
+      "outputSourceFiles": true,
+      "staticFiles": {
+        "include": [
+            "./src/jsdoc.css"
+        ]
+      }
+    },
+    "systemName": "wc Components",
+    "cleverLinks": true,
+    "monospaceLinks": true,
+    "path": "ink-docstrap",
+    "theme": "cerulean",
+    "navType": "vertical",
+    "inverseNav": true,
+    "linenums": true,
+    "dateFormat": "MMMM Do YYYY, h:mm:ss a",
+    "outputSourceFiles": true,
+    "syntaxTheme": "default"
+  }
+}

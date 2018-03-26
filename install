@@ -1,0 +1,15 @@
+#!/usr/bin/env node
+const fs = require('fs');
+const path = require('path');
+const projectRoot = path.join(__dirname, '/../../../');
+const CWD = process.cwd();
+if (!fs.existsSync(`${projectRoot}/package.json`)) {
+	process.exit(0);
+}
+let existingPackageJson = require(`${projectRoot}/package.json`);
+let packageFile = require(`${CWD}/package.json`);
+fs.renameSync(`${projectRoot}/package.json`, `${projectRoot}/package.old.json`);
+existingPackageJson.rollup = existingPackageJson.rollup || {};
+existingPackageJson.rollup.imports = existingPackageJson.rollup.imports || {};
+Object.assign(existingPackageJson.rollup.imports, packageFile.exports);
+fs.writeFileSync(`${projectRoot}/package.json`, JSON.stringify(existingPackageJson, null, 4));

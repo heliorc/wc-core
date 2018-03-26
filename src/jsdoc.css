@@ -1,0 +1,20 @@
+.container-overview > .name,
+.container-overview > h2 {
+    display: none;
+}
+.container-overview > h5.subsection-title {
+    color: transparent;
+    position: relative;
+}
+.container-overview > .subsection-title:after {
+    color: initial;
+    position: absolute;
+    left: 0;
+    content: "HTML Attributes:";
+}
+.class-description {
+    font-size: 1.5em;
+}
+header > h2 {
+    display: none;
+}
